@@ -9,7 +9,7 @@ export default function Home() {
 
           <main className="flex flex-col flex-grow container mx-auto px-3 items-center justify-center">
 
-              <LoremText/>
+              <LoremText paragraphs={5}/>
 
           </main>
           <Footer/>
