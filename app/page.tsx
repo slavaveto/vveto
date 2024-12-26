@@ -1,5 +1,6 @@
-import {Button} from '@nextui-org/button';
+//import {Button} from '@nextui-org/button';
 import Footer from "@/app/components/footer";
+import LoremText from "@/app/components/loremText";
 
 
 export default function Home() {
@@ -8,7 +9,7 @@ export default function Home() {
 
           <main className="flex flex-col flex-grow container mx-auto px-3 items-center justify-center">
 
-              NextUI подключен...
+              <LoremText/>
 
           </main>
           <Footer/>
