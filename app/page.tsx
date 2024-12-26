@@ -1,4 +1,6 @@
 import {Button} from '@nextui-org/button';
+import Footer from "@/app/components/footer";
+
 
 export default function Home() {
   return (
@@ -9,7 +11,7 @@ export default function Home() {
               NextUI подключен...
 
           </main>
-
+          <Footer/>
       </div>
   );
 }
