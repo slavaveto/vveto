@@ -11,7 +11,7 @@ export default {
   theme: {
     extend: {
       maxWidth: {
-        'xs2': '280px', // Для больших экранов
+        'xs2': '280px', // Для маленьких экранов
       },
       colors: {
         background: "var(--background)",

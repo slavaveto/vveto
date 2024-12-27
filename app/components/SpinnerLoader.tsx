@@ -32,7 +32,7 @@ const SpinnerLoader: React.FC<SpinnerLoaderProps> = ({ children }) => {
         return (
             <div
                 className="fixed inset-0 flex items-center justify-center z-50"
-                style={{ transform: 'translateY(-10vh)' }}
+                style={{ transform: 'translateY(-5vh)' }}
             >
                 <Spinner />
             </div>
