@@ -15,14 +15,22 @@ export default function Home() {
     const [fadeIn, setFadeIn] = useState(false); // Состояние плавного появления
     const [isClient, setIsClient] = useState(false); // Проверка, что это клиентская среда
 
+
     useEffect(() => {
+        // Этот эффект будет вызван каждый раз, когда состояние loading изменится
+        console.log('Loading state changed:', loading);
+    }, [loading]); // Следим за изменениями loading
+
+
+    useEffect(() => {
+
         // Устанавливаем состояние isClient в true только на клиенте
         setIsClient(true);
 
         const timer = setTimeout(() => {
             setLoading(false); // Убираем лоадер
             setFadeIn(true); // Включаем эффект fade
-        }, 1500);
+        }, 2000);
 
         return () => clearTimeout(timer); // Очистка таймера
     }, []);
