@@ -1,29 +1,72 @@
 "use client";
 
 import {
-    Navbar,
-    NavbarBrand,
-    NavbarContent,
-    NavbarItem,
-    NavbarMenuToggle,
-    NavbarMenu,
-    NavbarMenuItem
+    Navbar
 } from "@nextui-org/navbar";
 
 import MobileMenu from "@/app/components/mobileMenu";
 
+import React, {useState} from 'react';
+
+import {
+    Drawer,
+    DrawerContent,
+    useDisclosure,
+} from "@nextui-org/react";
+
+
 import {HiMiniBars3} from 'react-icons/hi2';
 
 function Header(props: any) {
+
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
     return (
+
 
         <Navbar shouldHideOnScroll className="-hidden -md:block mb-5 bg-blue-100 border-b -border-divider"
                 maxWidth="full">
 
+            <Drawer
+                isOpen={isOpen}
+                //size="xs"
+                radius="sm"
+                className="max-w-xs2 sm:max-w-sm"
+                motionProps={{
+                    variants: {
+                        enter: {
+                            x: 0,
+                            opacity: 1,
+                            transition: {
+                                //duration: 0.9, // Продолжительность анимации
+                            },
+                        },
+                        exit: {
+                            x: -100,
+                            opacity: 0,
+                            transition: {
+                                //duration: 0.9, // Продолжительность анимации
+                            },
+                        },
+                    },
+                }}
+                onOpenChange={onOpenChange}
+                placement="left"
+
+            >
+                <DrawerContent>
+                    {(onClose) => (
+                        <>
+                            <MobileMenu/>
+                        </>
+                    )}
+                </DrawerContent>
+            </Drawer>
+
             <div className="flex container mx-auto px-0 sm:px-3 items-center justify-between">
                 <div className="flex items-center">
-                    <button className="-ml-1 md:hidden"
-                            //onClick={onOpen}
+                    <button id="menu-close-btn" className="-ml-1 md:hidden"
+                            onClick={onOpen}
                             style={{
                                 background: 'none',
                                 border: 'none',

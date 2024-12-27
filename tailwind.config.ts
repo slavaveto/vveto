@@ -10,6 +10,9 @@ export default {
   ],
   theme: {
     extend: {
+      maxWidth: {
+        'xs2': '280px', // Для больших экранов
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

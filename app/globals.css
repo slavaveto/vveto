@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+button[aria-label="Close"] svg[role="presentation"] {
+  width: 32px; /* Увеличиваем ширину */
+  height: 32px; /* Увеличиваем высоту */
+}
+
 header {
   padding-left: 12px !important; /* Принудительное изменение паддинга */
   padding-right: 12px !important; /* Принудительное изменение паддинга */
