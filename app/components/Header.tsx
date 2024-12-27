@@ -64,7 +64,7 @@ function Header(props: any) {
 
             <div className="flex container mx-auto px-0 sm:px-3 items-center justify-between">
                 <div className="flex items-center ">
-                    <button id="menu-close-btn" className="-ml-1 md:hidden "
+                    <button id="menu-close-btn" className=" md:hidden "
                             onClick={onOpen}
                             style={{
                                 background: 'none',
