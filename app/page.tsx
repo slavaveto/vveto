@@ -5,19 +5,19 @@ import LoremText from "@/app/components/loremText";
 
 
 export default function Home() {
-  return (
-      <div className="flex flex-col min-h-svh">
+    return (
+        <div className="flex flex-col min-h-svh">
 
-          <Header/>
+            <Header/>
 
-          <main className="flex flex-col flex-grow container mx-auto px-3 items-center justify-center">
+            <main className="flex flex-col flex-grow container mx-auto px-3">
 
-              <LoremText paragraphs={5}/>
+                <LoremText paragraphs={7}/>
 
-          </main>
+            </main>
 
-          <Footer/>
+            <Footer/>
 
-      </div>
-  );
+        </div>
+    );
 }

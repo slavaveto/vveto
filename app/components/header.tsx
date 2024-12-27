@@ -11,28 +11,21 @@ import {
 } from "@nextui-org/navbar";
 import {Button} from '@nextui-org/button';
 
+import {HiMiniBars3} from 'react-icons/hi2';
+
 function Header(props: any) {
     return (
-        <Navbar shouldHideOnScroll isBordered className="-hidden -md:block mb-5" maxWidth="full"
+        <Navbar shouldHideOnScroll className="-hidden -md:block mb-5 bg-blue-100 border-b -border-divider"
+                maxWidth="full">
 
-
-        >
-
-            <div className="flex container mx-auto px-0 sm:px-3">
-                <NavbarBrand className=" sm:flex gap-4 bg-blue-100">
-                    dfgsdfgsg
-                </NavbarBrand>
-
-                <NavbarContent className=" sm:flex gap-4 bg-red-100">
-                    <NavbarItem className=" lg:flex">
-                        <p>23452345</p>
-                    </NavbarItem>
-                    <NavbarItem>
-                        <Button color="primary" href="#" variant="flat">
-                            Sign Up
-                        </Button>
-                    </NavbarItem>
-                </NavbarContent>
+            <div className="flex container mx-auto px-0 sm:px-3 items-center justify-between">
+                <div>
+                    <HiMiniBars3 size={30} className="-ml-1 md:hidden"/>
+                </div>
+                <div className="text-right">
+                    <p className="font-medium text-lg leading-4 pb-1">Вячеслав Вето</p>
+                    <p className="leading-4 text-sm italic">персональный сайт психолога</p>
+                </div>
             </div>
         </Navbar>
     );
