@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 button[aria-label="Close"] svg[role="presentation"] {
-  width: 32px; /* Увеличиваем ширину */
-  height: 32px; /* Увеличиваем высоту */
+  width: 28px; /* Увеличиваем ширину */
+  height: 28px; /* Увеличиваем высоту */
 }
 
 header {

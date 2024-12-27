@@ -23,8 +23,7 @@ function Header(props: any) {
 
     return (
 
-
-        <Navbar shouldHideOnScroll className="-hidden -md:block mb-5 bg-blue-100 border-b -border-divider"
+        <Navbar shouldHideOnScroll className="-hidden -md:block mb-5 bg-blue-100 backdrop-blur bg-opacity-50 border-b -border-divider"
                 maxWidth="full">
 
             <Drawer
@@ -64,8 +63,8 @@ function Header(props: any) {
             </Drawer>
 
             <div className="flex container mx-auto px-0 sm:px-3 items-center justify-between">
-                <div className="flex items-center">
-                    <button id="menu-close-btn" className="-ml-1 md:hidden"
+                <div className="flex items-center ">
+                    <button id="menu-close-btn" className="-ml-1 md:hidden "
                             onClick={onOpen}
                             style={{
                                 background: 'none',
@@ -73,7 +72,7 @@ function Header(props: any) {
                                 cursor: 'pointer',
                             }}
                     >
-                        <HiMiniBars3 size={30} className="-ml-1 md:hidden"/>
+                        <HiMiniBars3 size={30} className="-ml-1 md:hidden "/>
                     </button>
 
                 </div>
