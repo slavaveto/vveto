@@ -4,6 +4,7 @@ import "./globals.css";
 import {Providers} from "./providers";
 import favicon from "@/app/assets/favicon.ico";
 
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
