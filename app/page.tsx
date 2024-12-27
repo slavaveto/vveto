@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -8,6 +7,7 @@ import {Spinner} from "@nextui-org/react";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
 import LoremText from "@/app/components/LoremText";
+
 
 export default function Home() {
 
@@ -57,7 +57,7 @@ export default function Home() {
                 >
 
                     <Header/>
-
+{/*<ThemeSwitcher />*/}
                     <main className="flex flex-col flex-grow container mx-auto px-3">
 
                         <LoremText paragraphs={1}/>
