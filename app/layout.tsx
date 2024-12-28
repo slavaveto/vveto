@@ -6,8 +6,6 @@ import favicon from "@/app/_assets/favicon.ico";
 import Header from "./_components/Header"; // Подключаем Header
 import Footer from "./_components/Footer"; // Подключаем Footer
 import FadeWrapper from "@/app/_components/FadeWrapper";
-import PageTransitionWrapper from "./_components/PageTransitionWrapper"; // Обёртка для анимации переходов
-
 
 const inter = Inter({
     variable: "--font-inter",
@@ -22,26 +20,24 @@ export const metadata: Metadata = {
     }
 };
 
-export default function RootLayout({
-                                       children,
-                                   }: Readonly<{
+export default function RootLayout({children}: {
     children: React.ReactNode;
-}>) {
+}) {
     return (
         <html lang="en">
         <body className={`${inter.variable} antialiased`}>
         <Providers>
             <FadeWrapper>
-          <div className="flex flex-col min-h-svh">
-            <Header/>
-            <main className="flex-grow container mx-auto px-3">
-                <PageTransitionWrapper>{children}</PageTransitionWrapper>
-            </main>
-            <Footer />
-          </div>
-                </FadeWrapper>
+                <div className="flex flex-col min-h-svh">
+                    <Header/>
+                    <main className="flex-grow container mx-auto px-3">
+                        {children}
+                    </main>
+                    <Footer/>
+                </div>
+            </FadeWrapper>
         </Providers>
         </body>
         </html>
-);
+    );
 }
