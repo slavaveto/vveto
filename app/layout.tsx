@@ -6,6 +6,8 @@ import favicon from "@/app/_assets/favicon.ico";
 import Header from "./_components/Header"; // Подключаем Header
 import Footer from "./_components/Footer"; // Подключаем Footer
 import FadeWrapper from "@/app/_components/FadeWrapper";
+import PageTransitionWrapper from "./_components/PageTransitionWrapper"; // Обёртка для анимации переходов
+
 
 const inter = Inter({
     variable: "--font-inter",
@@ -33,7 +35,7 @@ export default function RootLayout({
           <div className="flex flex-col min-h-svh">
             <Header/>
             <main className="flex-grow container mx-auto px-3">
-                {children}
+                <PageTransitionWrapper>{children}</PageTransitionWrapper>
             </main>
             <Footer />
           </div>
