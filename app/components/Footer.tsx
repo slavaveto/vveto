@@ -4,7 +4,7 @@ import LangToggle from "@/app/components/LangToggle";
 
 function Footer() {
     return (
-        <footer className="bg-blue-50 flex h-[60px] mt-5 items-center border-t -border-divider">
+        <footer className="my_footer_bg flex h-[60px] mt-5 items-center">
             <div className="container flex mx-auto px-3 justify-between items-center">
                 <div>
                     <p className="font-medium text-lg leading-4 pb-1">Вячеслав Вето</p>

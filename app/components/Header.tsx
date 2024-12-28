@@ -23,7 +23,7 @@ function Header(props: any) {
 
     return (
 
-        <Navbar shouldHideOnScroll className="-hidden -md:block mb-5 bg-blue-100 backdrop-blur bg-opacity-50 border-b -border-divider"
+        <Navbar shouldHideOnScroll className="-hidden -md:block mb-5 my_navbar_bg backdrop-blur bg-opacity-50"
                 maxWidth="full">
 
             <Drawer
@@ -77,8 +77,8 @@ function Header(props: any) {
 
                 </div>
                 <div className="text-right">
-                    <p className="font-medium text-lg leading-4 pb-1">Вячеслав Вето</p>
-                    <p className="leading-4 text-sm italic">персональный сайт психолога</p>
+                    <p className="font-medium text-2xl leading-4 pb-1">Вячеслав Вето</p>
+                    <p className="leading-4 text-2sm italic">персональный сайт психолога</p>
                 </div>
             </div>
         </Navbar>

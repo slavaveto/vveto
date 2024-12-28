@@ -72,7 +72,6 @@ const ThemeToggle: React.FC = () => {
             aria-label="Выбор темы"
             color="primary"
             size="sm"
-            variant="bordered"
             selectedKey={theme} // Устанавливаем текущую выбранную тему
             onSelectionChange={(key) => handleThemeChange(key as Theme)} // Меняем тему при выборе вкладки
         >

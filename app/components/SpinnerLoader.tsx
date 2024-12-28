@@ -37,7 +37,7 @@ const SpinnerLoader: React.FC<SpinnerLoaderProps> = ({ children }) => {
         const timer = setTimeout(() => {
             setLoading(false); // Убираем лоадер
             setFadeIn(true); // Включаем эффект fade
-        }, 2000);
+        }, 3000);
 
         return () => clearTimeout(timer); // Очищаем таймер при размонтировании
     }, []);
@@ -49,7 +49,7 @@ const SpinnerLoader: React.FC<SpinnerLoaderProps> = ({ children }) => {
     if (loading) {
         return (
             <div
-                className={`fixed inset-0 flex items-center justify-center z-50 ${
+                className={`fixed inset-0 flex items-center mt-10 justify-center z-50 ${
                     theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'
                 }`}
                 style={{ transform: 'translateY(-5vh)' }}

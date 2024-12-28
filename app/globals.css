@@ -2,6 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/* Светлая тема */
+html.light {
+  @apply bg-light-background text-light-text;
+}
+/* Тёмная тема (через класс dark) */
+html.dark {
+  @apply bg-dark-background text-dark-text;
+}
+
+/* Глобальный класс для navbar */
+.my_navbar_bg {
+  @apply bg-navbarLight text-textLight; /* Для светлой темы */
+}
+.dark .my_navbar_bg {
+  @apply bg-navbarDark text-textDark; /* Для тёмной темы */
+}
+
+.my_footer_bg {
+  @apply bg-footerLight text-textLight; /* Для светлой темы */
+}
+.dark .my_footer_bg {
+  @apply bg-footerDark text-textDark; /* Для тёмной темы */
+}
+
 button[aria-label="Close"] svg[role="presentation"] {
   width: 28px; /* Увеличиваем ширину */
   height: 28px; /* Увеличиваем высоту */
