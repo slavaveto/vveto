@@ -1,3 +1,5 @@
+"use client";
+
 import ThemeToggle from "@/app/_components/ThemeToggle";
 import LangToggle from "@/app/_components/LangToggle";
 

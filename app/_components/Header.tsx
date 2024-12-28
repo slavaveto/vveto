@@ -20,6 +20,19 @@ function Header() {
                 isOpen={isOpen}
                 onOpenChange={onOpenChange}
                 placement="left"
+                className="max-w-xs2 sm:max-w-xs"
+                motionProps={{
+                    variants: {
+                        enter: {
+                            opacity: 1,
+                            x: 0,
+                        },
+                        exit: {
+                            x: -100,
+                            opacity: 0,
+                        },
+                    },
+                }}
             >
                 <DrawerContent>
 

@@ -12,7 +12,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Светлая тема
+               // Светлая тема
         light: {
           background: '#ffffff', // Фон светлой темы
           text: '#212936', // Текст светлой темы
@@ -31,9 +31,11 @@ export default {
         footerLight: '#e5e6e6', // Фон для светлой темы
         footerDark: '#16191e', // Фон для тёмной темы
       },
+
       maxWidth: {
         'xs2': '280px', // Для маленьких экранов
       },
+
     },
   },
   plugins: [nextui()],
