@@ -6,7 +6,7 @@ export default function Home() {
 
     return (
 
-        <LoremText paragraphs={1}/>
+        <div>контакты</div>
 
     );
 }

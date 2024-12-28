@@ -1,7 +1,7 @@
 'use client';
 
 import { Tabs, Tab } from '@nextui-org/react';
-import { LightThemeIcon, DarkThemeIcon, AutoThemeIcon } from '@/app/assets/svg_icons';
+import { LightThemeIcon, DarkThemeIcon, AutoThemeIcon } from '@/app/_assets/svg_icons';
 import React, { useEffect, useState } from 'react';
 
 type Theme = 'light' | 'dark' | 'system';

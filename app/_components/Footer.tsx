@@ -1,5 +1,5 @@
-import ThemeToggle from "@/app/components/ThemeToggle";
-import LangToggle from "@/app/components/LangToggle";
+import ThemeToggle from "@/app/_components/ThemeToggle";
+import LangToggle from "@/app/_components/LangToggle";
 
 
 function Footer() {

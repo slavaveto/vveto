@@ -4,9 +4,9 @@ import React, { useState, useEffect } from 'react';
 import {Spinner} from "@nextui-org/react";
 
 //import {Button} from '@nextui-org/button';
-import Header from "@/app/components/Header";
-import Footer from "@/app/components/Footer";
-import LoremText from "@/app/components/LoremText";
+import Header from "@/app/_components/Header";
+import Footer from "@/app/_components/Footer";
+import LoremText from "@/app/_components/LoremText";
 
 
 export default function Home() {

@@ -4,7 +4,7 @@ import {
     Navbar
 } from "@nextui-org/navbar";
 
-import MobileMenu from "@/app/components/MobileMenu";
+import MobileMenu from "@/app/_components/MobileMenu";
 
 import React, {useState} from 'react';
 

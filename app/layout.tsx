@@ -1,10 +1,11 @@
 import type {Metadata} from "next";
 import {Inter} from 'next/font/google';
 import "./globals.css";
-import {Providers} from "./components/Providers";
-import favicon from "@/app/assets/favicon.ico";
-import Header from "./components/Header"; // Подключаем Header
-import Footer from "./components/Footer"; // Подключаем Footer
+import {Providers} from "./_components/Providers";
+import favicon from "@/app/_assets/favicon.ico";
+import Header from "./_components/Header"; // Подключаем Header
+import Footer from "./_components/Footer"; // Подключаем Footer
+import FadeWrapper from "@/app/_components/FadeWrapper";
 
 const inter = Inter({
     variable: "--font-inter",
@@ -28,6 +29,7 @@ export default function RootLayout({
         <html lang="en">
         <body className={`${inter.variable} antialiased`}>
         <Providers>
+            <FadeWrapper>
           <div className="flex flex-col min-h-svh">
             <Header/>
             <main className="flex-grow container mx-auto px-3">
@@ -35,6 +37,7 @@ export default function RootLayout({
             </main>
             <Footer />
           </div>
+                </FadeWrapper>
         </Providers>
         </body>
         </html>
