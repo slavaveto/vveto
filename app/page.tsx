@@ -45,28 +45,30 @@ export default function Home() {
 
     return (
         <>
-            {loading && <div className="fixed inset-0 flex -items-center justify-center  -top-0 z-50" style={{ transform: 'translateY(-10vh)' }}>
+            {loading && <div className="fixed inset-0 flex justify-center z-50"
+                             style={{ transform: 'translateY(-5vh)' }}>
+
                 <Spinner className=" " />
             </div>} {/* Показываем лоадер при загрузке */}
 
 
-                <div
-                    className={`flex flex-col min-h-svh transition-opacity duration-500 ${
-                        fadeIn ? 'opacity-100' : 'opacity-0'
-                    }`}
-                >
+            <div
+                className={`flex flex-col min-h-svh transition-opacity duration-500 ${
+                    fadeIn ? 'opacity-100' : 'opacity-0'
+                }`}
+            >
 
-                    <Header/>
-{/*<ThemeSwitcher />*/}
-                    <main className="flex flex-col flex-grow container mx-auto px-3">
+                <Header/>
+                {/*<ThemeSwitcher />*/}
+                <main className="flex flex-col flex-grow container mx-auto px-3">
 
-                        <LoremText paragraphs={1}/>
+                    <LoremText paragraphs={1}/>
 
-                    </main>
+                </main>
 
-                    <Footer/>
+                <Footer/>
 
-                </div>
-            </>
-            );
-            }
+            </div>
+        </>
+    );
+}
