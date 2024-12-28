@@ -9,7 +9,6 @@ import MobileMenu from "./MobileMenu";
 function Header() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-
     return (
         <Navbar
             shouldHideOnScroll
@@ -23,11 +22,7 @@ function Header() {
                 placement="left"
             >
                 <DrawerContent>
-
-                    <MobileMenu onClose={() => {
-                        // @ts-ignore
-                        onOpenChange(false);
-                    }} />
+                    <MobileMenu onClose={() => onOpenChange(false)} />
                 </DrawerContent>
             </Drawer>
 

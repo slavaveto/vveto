@@ -1,24 +1,26 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
-import { usePathname } from 'next/navigation';
+import React, { useEffect, useState } from "react";
 
 const FadeWrapper = ({ children }: { children: React.ReactNode }) => {
-    const pathname = usePathname(); // Следим за изменением пути
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoaded(true); // Анимация через 500ms
+        }, 500);
+
+        return () => clearTimeout(timer);
+    }, []);
 
     return (
-        <AnimatePresence mode="wait">
-            <motion.div
-                key={pathname} // Уникальный ключ для отслеживания переходов
-                initial={{ opacity: 0 }} // Анимация появления
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }} // Анимация исчезновения
-                transition={{ duration: 0.5 }} // Длительность анимации
-                className="flex-grow" // Flexbox для сохранения структуры
-            >
-                {children}
-            </motion.div>
-        </AnimatePresence>
+        <div
+            className={`transition-opacity duration-1000 ${
+                isLoaded ? "opacity-100" : "opacity-0"
+            }`}
+        >
+            {children}
+        </div>
     );
 };
 

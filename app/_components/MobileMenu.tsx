@@ -14,20 +14,16 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
     const router = useRouter();
     const pathname = usePathname(); // Получение текущего пути
 
-    // Асинхронная функция для обработки действия
-    const handleAction = async (key: Key) => {
-        const route = String(key); // Преобразуем Key в строку
+    const handleAction = (key: Key) => {
+        const route = String(key); // Преобразование Key в строку
 
-        // Сначала закрываем Drawer
-        onClose();
-
-        // Делаем паузу, чтобы Drawer успел закрыться
-        await new Promise((resolve) => setTimeout(resolve, 300)); // 300ms
-
-        // Выполняем переход на соответствующую страницу
+        // Навигация на соответствующую страницу
         if (route === "home") router.push("/");
         if (route === "about") router.push("/about");
         if (route === "contacts") router.push("/contacts");
+
+        // Закрытие Drawer
+        onClose();
     };
 
     return (
