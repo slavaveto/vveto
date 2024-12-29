@@ -12,6 +12,8 @@ export default {
   theme: {
     extend: {
       colors: {
+
+        mycolor: '#ff0000',
                // Светлая тема
         light: {
           background: '#ffffff', // Фон светлой темы

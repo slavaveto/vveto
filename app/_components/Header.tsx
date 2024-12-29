@@ -20,7 +20,7 @@ function Header() {
                 isOpen={isOpen}
                 onOpenChange={onOpenChange}
                 placement="left"
-                className="max-w-xs2 sm:max-w-xs"
+                className="max-w-xs2 sm:max-w-md"
                 motionProps={{
                     variants: {
                         enter: {
@@ -43,10 +43,10 @@ function Header() {
             </Drawer>
 
             {/* Основной контент Header */}
-            <div className="flex container mx-auto px-0 sm:px-3 items-center justify-between">
+            <div className="flex container mx-auto px-0 sm:px-3 items-center justify-between max-w-screen-md">
                 <div className="flex items-center">
                     <button
-                        className="md:hidden"
+                        className="-md:hidden"
                         onClick={onOpen}
                         style={{
                             background: "none",
@@ -54,7 +54,7 @@ function Header() {
                             cursor: "pointer",
                         }}
                     >
-                        <HiMiniBars3 size={30} />
+                        <HiMiniBars3 size={30} className="-ml-[3px]"/>
                     </button>
                 </div>
                 <div className="text-right">

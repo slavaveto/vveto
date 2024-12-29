@@ -32,9 +32,11 @@ export default function RootLayout({children}: {
             <FadeWrapper>
                 <div className="flex flex-col min-h-svh">
                     <Header/>
-                    <main className="flex-grow container mx-auto px-3">
+
+                    <main className="flex-grow container mx-auto px-3 max-w-screen-md">
                         {children}
                     </main>
+
                     <Footer/>
                 </div>
             </FadeWrapper>
