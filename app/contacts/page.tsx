@@ -3,6 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 import { Input, Button, Textarea, Alert } from "@nextui-org/react";
 import { AnimatePresence, motion } from "framer-motion";
+import emailjs from "emailjs-com"; // Подключение EmailJS
+
+
 
 export default function Home() {
     const [formData, setFormData] = useState({
@@ -20,7 +23,7 @@ export default function Home() {
     const [isLoading, setIsLoading] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [suggestions, setSuggestions] = useState<string[]>([]);
-    const suggestionsRef = useRef<HTMLDivElement | null>(null); // Ссылка на контейнер подсказок
+    const suggestionsRef = useRef<HTMLDivElement | null>(null);
 
     const popularDomains = ["gmail.com", "yandex.ru", "yahoo.com", "outlook.com"];
 
@@ -35,7 +38,7 @@ export default function Home() {
                 suggestionsRef.current &&
                 !suggestionsRef.current.contains(event.target as Node)
             ) {
-                setSuggestions([]); // Скрываем список, если клик вне контейнера
+                setSuggestions([]);
             }
         };
 
@@ -45,7 +48,7 @@ export default function Home() {
         };
     }, []);
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const newErrors = {
             name: formData.name.trim() === "",
             email: formData.email.trim() === "",
@@ -67,8 +70,26 @@ export default function Home() {
         ) {
             setIsLoading(true);
 
-            setTimeout(() => {
-                setIsLoading(false);
+            try {
+                const isEmailSendingEnabled = false;
+
+                if (isEmailSendingEnabled) { // Проверяем, включена ли отправка
+                    await emailjs.send(
+                        "service_cmjqu15", // Ваш Service ID
+                        "template_3bi5wrp", // Ваш Template ID
+                        {
+                            name: formData.name,
+                            email: formData.email,
+                            telegram: formData.telegram,
+                            message: formData.message,
+                        },
+                        "kf-Uuxi5EoVT_l-8a" // Ваш Public Key
+                    );
+                    console.log("Сообщение отправлено через EmailJS.");
+                } else {
+                    console.log("Отправка через EmailJS временно отключена.");
+                }
+
                 setIsSubmitted(true);
                 setFormData({
                     name: "",
@@ -77,7 +98,11 @@ export default function Home() {
                     message: "",
                 });
                 setErrors({ name: false, email: false, telegram: false });
-            }, 1500);
+            } catch (error) {
+                console.error("Ошибка отправки через EmailJS:", error);
+            } finally {
+                setIsLoading(false);
+            }
         }
     };
 
@@ -92,7 +117,6 @@ export default function Home() {
         }));
 
         if (name === "email") {
-            // Показываем предложения после ввода первых 3 символов
             if (value.length >= 3 && !value.includes("@")) {
                 const suggestions = popularDomains.map(
                     (domain) => `${value}@${domain}`
@@ -153,9 +177,9 @@ export default function Home() {
                 {!isSubmitted ? (
                     <motion.div
                         key="form"
-                        initial={{opacity: 0}}
-                        animate={{opacity: 1}}
-                        exit={{opacity: 0}}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
                         className="flex flex-col gap-4"
                     >
                         <Input
@@ -175,8 +199,8 @@ export default function Home() {
                             <Input
                                 label={
                                     <span>
-                Email<span className="text-danger-300"> *</span>
-            </span>
+                                        Email<span className="text-danger-300"> *</span>
+                                    </span>
                                 }
                                 name="email"
                                 type="email"
@@ -188,11 +212,11 @@ export default function Home() {
                             <AnimatePresence>
                                 {errors.email && formData.email.trim() && (
                                     <motion.div
-                                        initial={{opacity: 0, height: 0}}
-                                        animate={{opacity: 1, height: "auto"}}
-                                        exit={{opacity: 0, height: 0}}
+                                        initial={{ opacity: 0, height: 0 }}
+                                        animate={{ opacity: 1, height: "auto" }}
+                                        exit={{ opacity: 0, height: 0 }}
                                         className="text-danger-500 text-xs mt-1 ml-1"
-                                        transition={{duration: 0.3}}
+                                        transition={{ duration: 0.3 }}
                                     >
                                         Неверный формат email
                                     </motion.div>
@@ -252,9 +276,9 @@ export default function Home() {
                 ) : (
                     <motion.div
                         key="alert"
-                        initial={{opacity: 0}}
-                        animate={{opacity: 1}}
-                        exit={{opacity: 0}}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
                         className="flex flex-col items-center gap-4"
                     >
                         <Alert
