@@ -153,9 +153,9 @@ export default function Home() {
                 {!isSubmitted ? (
                     <motion.div
                         key="form"
-                        initial={{opacity: 0}}
-                        animate={{opacity: 1}}
-                        exit={{opacity: 0}}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
                         className="flex flex-col gap-4"
                     >
                         <Input
@@ -175,8 +175,8 @@ export default function Home() {
                             <Input
                                 label={
                                     <span>
-                Email<span className="text-danger-300"> *</span>
-            </span>
+                                        Email<span className="text-danger-300"> *</span>
+                                    </span>
                                 }
                                 name="email"
                                 type="email"
@@ -188,11 +188,11 @@ export default function Home() {
                             <AnimatePresence>
                                 {errors.email && formData.email.trim() && (
                                     <motion.div
-                                        initial={{opacity: 0, height: 0}}
-                                        animate={{opacity: 1, height: "auto"}}
-                                        exit={{opacity: 0, height: 0}}
+                                        initial={{ opacity: 0, height: 0 }}
+                                        animate={{ opacity: 1, height: "auto" }}
+                                        exit={{ opacity: 0, height: 0 }}
                                         className="text-danger-500 text-xs mt-1 ml-1"
-                                        transition={{duration: 0.3}}
+                                        transition={{ duration: 0.3 }}
                                     >
                                         Неверный формат email
                                     </motion.div>
@@ -201,22 +201,17 @@ export default function Home() {
                             {suggestions.length > 0 && (
                                 <div
                                     ref={suggestionsRef}
-                                    className={`absolute z-50 bg-primary-50 shadow-lg rounded-lg py-2 w-full transition-transform duration-300 ${
-                                        errors.email ? "-mt-5" : "mt-0"
-                                    }`}
+                                    className="absolute z-10 mt-2 bg-white shadow-md rounded-lg p-2 w-full"
                                 >
-                                    {suggestions.map((suggestion, index) => {
-                                        const [userInput, domain] = suggestion.split("@");
-                                        return (
-                                            <div
-                                                key={index}
-                                                onClick={() => handleSuggestionClick(suggestion)}
-                                                className="text-sm cursor-pointer px-2 py-2 hover:bg-gray-200"
-                                            >
-                                                <span className="font-bold">{userInput}</span>@{domain}
-                                            </div>
-                                        );
-                                    })}
+                                    {suggestions.map((suggestion, index) => (
+                                        <div
+                                            key={index}
+                                            onClick={() => handleSuggestionClick(suggestion)}
+                                            className="cursor-pointer p-1 hover:bg-gray-200"
+                                        >
+                                            {suggestion}
+                                        </div>
+                                    ))}
                                 </div>
                             )}
                         </div>
@@ -252,9 +247,9 @@ export default function Home() {
                 ) : (
                     <motion.div
                         key="alert"
-                        initial={{opacity: 0}}
-                        animate={{opacity: 1}}
-                        exit={{opacity: 0}}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
                         className="flex flex-col items-center gap-4"
                     >
                         <Alert

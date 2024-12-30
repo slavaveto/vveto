@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { Input, Button, Textarea, Alert } from "@nextui-org/react";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -19,31 +19,11 @@ export default function Home() {
     const [emailTouched, setEmailTouched] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const [suggestions, setSuggestions] = useState<string[]>([]);
-    const suggestionsRef = useRef<HTMLDivElement | null>(null); // Ссылка на контейнер подсказок
-
-    const popularDomains = ["gmail.com", "yandex.ru", "yahoo.com", "outlook.com"];
 
     const isFormEmpty =
         !formData.name.trim() &&
         !formData.email.trim() &&
         !formData.telegram.trim();
-
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (
-                suggestionsRef.current &&
-                !suggestionsRef.current.contains(event.target as Node)
-            ) {
-                setSuggestions([]); // Скрываем список, если клик вне контейнера
-            }
-        };
-
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, []);
 
     const handleSubmit = () => {
         const newErrors = {
@@ -69,7 +49,7 @@ export default function Home() {
 
             setTimeout(() => {
                 setIsLoading(false);
-                setIsSubmitted(true);
+                setIsSubmitted(true); // Устанавливаем, что форма отправлена
                 setFormData({
                     name: "",
                     email: "",
@@ -92,54 +72,20 @@ export default function Home() {
         }));
 
         if (name === "email") {
-            // Показываем предложения после ввода первых 3 символов
-            if (value.length >= 3 && !value.includes("@")) {
-                const suggestions = popularDomains.map(
-                    (domain) => `${value}@${domain}`
-                );
-                setSuggestions(suggestions);
-            } else {
-                setSuggestions([]);
-            }
-
+            // Проверяем email при любом изменении, если кнопка уже была нажата
             if (emailTouched) {
-                if (validateEmail(value)) {
-                    setErrors((prev) => ({
-                        ...prev,
-                        email: false,
-                    }));
-                } else {
-                    setErrors((prev) => ({
-                        ...prev,
-                        email: true,
-                    }));
-                }
+                setErrors((prev) => ({
+                    ...prev,
+                    email: !validateEmail(value),
+                }));
             }
         } else {
-            if (value.trim() !== "") {
-                setErrors((prev) => ({
-                    ...prev,
-                    [name]: false,
-                }));
-            } else {
-                setErrors((prev) => ({
-                    ...prev,
-                    [name]: true,
-                }));
-            }
+            // Проверяем обязательные поля
+            setErrors((prev) => ({
+                ...prev,
+                [name]: value.trim() === "",
+            }));
         }
-    };
-
-    const handleSuggestionClick = (suggestion: string) => {
-        setFormData((prev) => ({
-            ...prev,
-            email: suggestion,
-        }));
-        setSuggestions([]);
-        setErrors((prev) => ({
-            ...prev,
-            email: false,
-        }));
     };
 
     const validateEmail = (email: string) => {
@@ -153,9 +99,9 @@ export default function Home() {
                 {!isSubmitted ? (
                     <motion.div
                         key="form"
-                        initial={{opacity: 0}}
-                        animate={{opacity: 1}}
-                        exit={{opacity: 0}}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
                         className="flex flex-col gap-4"
                     >
                         <Input
@@ -171,12 +117,12 @@ export default function Home() {
                             onChange={handleChange}
                             isInvalid={errors.name}
                         />
-                        <div className="relative">
+                        <div>
                             <Input
                                 label={
                                     <span>
-                Email<span className="text-danger-300"> *</span>
-            </span>
+                                        Email<span className="text-danger-300"> *</span>
+                                    </span>
                                 }
                                 name="email"
                                 type="email"
@@ -188,37 +134,16 @@ export default function Home() {
                             <AnimatePresence>
                                 {errors.email && formData.email.trim() && (
                                     <motion.div
-                                        initial={{opacity: 0, height: 0}}
-                                        animate={{opacity: 1, height: "auto"}}
-                                        exit={{opacity: 0, height: 0}}
+                                        initial={{ opacity: 0, height: 0 }}
+                                        animate={{ opacity: 1, height: "auto" }}
+                                        exit={{ opacity: 0, height: 0 }}
                                         className="text-danger-500 text-xs mt-1 ml-1"
-                                        transition={{duration: 0.3}}
+                                        transition={{ duration: 0.3 }}
                                     >
                                         Неверный формат email
                                     </motion.div>
                                 )}
                             </AnimatePresence>
-                            {suggestions.length > 0 && (
-                                <div
-                                    ref={suggestionsRef}
-                                    className={`absolute z-50 bg-primary-50 shadow-lg rounded-lg py-2 w-full transition-transform duration-300 ${
-                                        errors.email ? "-mt-5" : "mt-0"
-                                    }`}
-                                >
-                                    {suggestions.map((suggestion, index) => {
-                                        const [userInput, domain] = suggestion.split("@");
-                                        return (
-                                            <div
-                                                key={index}
-                                                onClick={() => handleSuggestionClick(suggestion)}
-                                                className="text-sm cursor-pointer px-2 py-2 hover:bg-gray-200"
-                                            >
-                                                <span className="font-bold">{userInput}</span>@{domain}
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            )}
                         </div>
                         <Input
                             label={
@@ -252,17 +177,25 @@ export default function Home() {
                 ) : (
                     <motion.div
                         key="alert"
-                        initial={{opacity: 0}}
-                        animate={{opacity: 1}}
-                        exit={{opacity: 0}}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
                         className="flex flex-col items-center gap-4"
                     >
                         <Alert
                             color="success"
                             variant="faded"
+                            title = "3456456"
                             description="Ваше сообщение успешно отправлено!"
                         >
                             Успех!
+                            Успех!
+                            Успех!
+                            Успех!
+                            Успех!
+                            Успех!
+                            Успех!
+
                         </Alert>
                     </motion.div>
                 )}

@@ -59,7 +59,7 @@ function Header() {
                 </div>
                 <div className="text-right">
                     <p className="font-medium text-2xl leading-4 pb-1">Вячеслав Вето</p>
-                    <p className="leading-4 text-2sm italic">персональный сайт психолога</p>
+                    <p className="leading-4 text-2sm italic">консультирование и коучинг</p>
                 </div>
             </div>
         </Navbar>

@@ -27,6 +27,18 @@ html.dark {
   @apply bg-footerDark text-textDark; /* Для тёмной темы */
 }
 
+
+
+
+
+.group.data-slot[input-wrapper]{
+  background-color: rgba(255, 0, 0, 0.2) !important;
+  z-index: 1000;
+}
+
+
+
+
 button[aria-label="Close"] svg[role="presentation"] {
   width: 28px; /* Увеличиваем ширину */
   height: 28px; /* Увеличиваем высоту */
