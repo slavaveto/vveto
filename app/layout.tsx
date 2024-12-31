@@ -26,11 +26,12 @@ export default function RootLayout({children}: {
     return (
         <html lang="en">
         <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         </head>
         <body className={`${inter.variable} antialiased`}>
         <Providers>
             <FadeWrapper>
-                <div className="flex flex-col min-h-svh">
+            <div className="flex flex-col min-h-svh">
                     <Header/>
                     <Toaster />
                     <main className="flex-grow container mx-auto px-3 max-w-screen-md">

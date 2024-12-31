@@ -28,7 +28,20 @@ html.dark {
 }
 
 
+input, textarea, select {
+  font-size: 16px !important; /* Минимальный размер для предотвращения zoom */
+}
 
+div.suggestion-item {
+  text-decoration: none !important;
+  color: inherit !important; /* Чтобы убрать автоматический цвет ссылок */
+}
+div.suggestion-item:hover {
+  text-decoration: none !important; /* Убирает подчеркивание при наведении */
+}
+.suggestion-item span {
+  text-decoration: none !important;
+}
 
 
 button[aria-label="Close"] svg[role="presentation"] {

@@ -1,13 +1,12 @@
 'use client';
 
-import { useState, useEffect, useRef } from "react";
-import { Input, Button, Textarea, Alert } from "@nextui-org/react";
-import { AnimatePresence, motion } from "framer-motion";
+import {useState, useEffect, useRef} from "react";
+import {Input, Button, Textarea, Alert} from "@nextui-org/react";
+import {AnimatePresence, motion} from "framer-motion";
 import emailjs from "emailjs-com";
 
 // const isEmailSendingEnabled = false;
 // const isMessageRequired = false; // Ф
-
 
 interface ContactFormProps {
     isEmailSendingEnabled?: boolean; // Если это свойство необязательное
@@ -74,7 +73,7 @@ export default function ContactForm({
         setErrors(newErrors);
 
         if (!newErrors.email && !validateEmail(formData.email)) {
-            setErrors((prev) => ({ ...prev, email: true }));
+            setErrors((prev) => ({...prev, email: true}));
             setEmailTouched(true);
         }
 
@@ -112,7 +111,7 @@ export default function ContactForm({
                     telegram: "",
                     message: "",
                 });
-                setErrors({ name: false, email: false, telegram: false, message: false });
+                setErrors({name: false, email: false, telegram: false, message: false});
             } catch (error) {
                 console.error("Ошибка отправки через EmailJS:", error);
             } finally {
@@ -124,7 +123,7 @@ export default function ContactForm({
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
 
         setFormData((prev) => ({
             ...prev,
@@ -186,15 +185,21 @@ export default function ContactForm({
         return emailRegex.test(email);
     };
 
+    const validateTelegram = (telegram: string) => {
+        const usernameRegex = /^@[a-zA-Z0-9_]{5,}$/; // Юзернейм в Telegram
+        const phoneRegex = /^\+?[1-9]\d{1,14}$/; // Номер телефона
+        return usernameRegex.test(telegram) || phoneRegex.test(telegram);
+    };
+
     return (
-        <div className="flex flex-col gap-4 w-full max-w-xs mx-auto">
+        <div className="flex flex-col gap-4 w-full md:max-w-xs mx-auto">
             <AnimatePresence mode="wait">
                 {!isSubmitted ? (
                     <motion.div
                         key="form"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
+                        initial={{opacity: 0}}
+                        animate={{opacity: 1}}
+                        exit={{opacity: 0}}
                         className="flex flex-col gap-4"
                     >
                         <Input
@@ -227,11 +232,11 @@ export default function ContactForm({
                             <AnimatePresence>
                                 {errors.email && formData.email.trim() && (
                                     <motion.div
-                                        initial={{ opacity: 0, height: 0 }}
-                                        animate={{ opacity: 1, height: "auto" }}
-                                        exit={{ opacity: 0, height: 0 }}
+                                        initial={{opacity: 0, height: 0}}
+                                        animate={{opacity: 1, height: "auto"}}
+                                        exit={{opacity: 0, height: 0}}
                                         className="text-danger-500 text-xs mt-1 ml-1"
-                                        transition={{ duration: 0.3 }}
+                                        transition={{duration: 0.3}}
                                     >
                                         Неверный формат email
                                     </motion.div>
@@ -250,9 +255,18 @@ export default function ContactForm({
                                             <div
                                                 key={index}
                                                 onClick={() => handleSuggestionClick(suggestion)}
-                                                className="text-sm cursor-pointer px-2 py-2 hover:bg-gray-200"
+                                                className="suggestion-item text-md cursor-pointer px-2 py-2 hover:bg-gray-200"
+
                                             >
-                                                <span className="font-bold">{userInput}</span>@{domain}
+                                                <span className="-font-bold"
+                                                      style={{textDecoration: "none"}}>
+                                                    {userInput}
+                                                </span>
+                                                <span
+                                                className="-font-bold"
+                                                style={{textDecoration: "none"}}>
+                                                    @{domain}
+                                                </span>
                                             </div>
                                         );
                                     })}
@@ -268,6 +282,8 @@ export default function ContactForm({
                             name="telegram"
                             type="text"
                             size="sm"
+                            // description={<span>Начните с <span className="
+                            // text-danger-300">+</span> для номера телефона и с @ для юзернейма</span>}
                             value={formData.telegram}
                             onChange={handleChange}
                             isInvalid={errors.telegram}
@@ -301,9 +317,9 @@ export default function ContactForm({
                 ) : (
                     <motion.div
                         key="alert"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
+                        initial={{opacity: 0}}
+                        animate={{opacity: 1}}
+                        exit={{opacity: 0}}
                         className="flex flex-col items-center gap-4"
                     >
                         <Alert
