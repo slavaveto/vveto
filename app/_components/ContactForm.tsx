@@ -3,12 +3,23 @@
 import { useState, useEffect, useRef } from "react";
 import { Input, Button, Textarea, Alert } from "@nextui-org/react";
 import { AnimatePresence, motion } from "framer-motion";
-import emailjs from "emailjs-com"; // Подключение EmailJS
+import emailjs from "emailjs-com";
 
-const isEmailSendingEnabled = false;
+// const isEmailSendingEnabled = false;
+// const isMessageRequired = false; // Ф
 
 
-export default function Home() {
+interface ContactFormProps {
+    isEmailSendingEnabled?: boolean; // Если это свойство необязательное
+    isMessageRequired?: boolean; // Если это свойство необязательное
+    onSubmitSuccess?: () => void;
+}
+
+export default function ContactForm({
+                                        isEmailSendingEnabled,
+                                        isMessageRequired,
+                                        onSubmitSuccess,
+                                    }: ContactFormProps) {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -19,6 +30,7 @@ export default function Home() {
         name: false,
         email: false,
         telegram: false,
+        message: false,
     });
     const [emailTouched, setEmailTouched] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +43,9 @@ export default function Home() {
     const isFormEmpty =
         !formData.name.trim() &&
         !formData.email.trim() &&
-        !formData.telegram.trim();
+        !formData.telegram.trim() &&
+        !formData.message.trim()
+    // (isMessageRequired && !formData.message.trim());
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -54,6 +68,7 @@ export default function Home() {
             name: formData.name.trim() === "",
             email: formData.email.trim() === "",
             telegram: formData.telegram.trim() === "",
+            message: isMessageRequired ? formData.message.trim() === "" : false,
         };
 
         setErrors(newErrors);
@@ -67,23 +82,23 @@ export default function Home() {
             !newErrors.name &&
             !newErrors.email &&
             !newErrors.telegram &&
+            (!isMessageRequired || !newErrors.message) &&
             validateEmail(formData.email)
         ) {
             setIsLoading(true);
 
             try {
-
-                if (isEmailSendingEnabled) { // Проверяем, включена ли отправка
+                if (isEmailSendingEnabled) {
                     await emailjs.send(
-                        "service_cmjqu15", // Ваш Service ID
-                        "template_3bi5wrp", // Ваш Template ID
+                        "service_cmjqu15",
+                        "template_3bi5wrp",
                         {
                             name: formData.name,
                             email: formData.email,
                             telegram: formData.telegram,
                             message: formData.message,
                         },
-                        "kf-Uuxi5EoVT_l-8a" // Ваш Public Key
+                        "kf-Uuxi5EoVT_l-8a"
                     );
                     console.log("Сообщение отправлено через EmailJS.");
                 } else {
@@ -97,7 +112,7 @@ export default function Home() {
                     telegram: "",
                     message: "",
                 });
-                setErrors({ name: false, email: false, telegram: false });
+                setErrors({ name: false, email: false, telegram: false, message: false });
             } catch (error) {
                 console.error("Ошибка отправки через EmailJS:", error);
             } finally {
@@ -258,11 +273,21 @@ export default function Home() {
                             isInvalid={errors.telegram}
                         />
                         <Textarea
-                            label="Сообщение"
+                            label={
+                                <span>
+                                    Сообщение
+                                    <span className="text-danger-300">
+                                    {isMessageRequired ? " *" : ""}
+                                        </span>
+                                </span>
+                            }
+
+
                             name="message"
                             size="sm"
                             value={formData.message}
                             onChange={handleChange}
+                            isInvalid={isMessageRequired && errors.message} // Условие на обязательность
                         />
                         <Button
                             color="primary"
